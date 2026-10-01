@@ -36,29 +36,6 @@ biopro_h <- nhanes("BIOPRO_H")
 
 # Now to merge required variables :
 
-g_sub <- demo_g %>% 
-  select(SEQN, RIDAGEYR, RIAGENDR, RIDRETH1, RIDEXPRG, WTMEC2YR, SDMVPSU, SDMVSTRA) %>%
-  left_join(bmx_g    %>% select(SEQN, BMXHT, BMXWT, BMXBMI, BMXWAIST), by = "SEQN") %>%
-  left_join(mgx_g    %>% select(SEQN, MGDCGSZ), by = "SEQN") %>%
-  left_join(dxx_g    %>% select(SEQN, DXDLALE, DXDRALE, DXDLLLE, DXDRLLE), by = "SEQN") %>%
-  left_join(biopro_g %>% select(SEQN, LBXSCR, LBXSGL), by = "SEQN") %>%
-  left_join(alb_g    %>% select(SEQN, URXUMA, URXUCR), by = "SEQN") %>%
-  left_join(bpx_g    %>% select(SEQN, BPXSY1, BPXDI1), by = "SEQN") %>%
-  left_join(kiq_g    %>% select(SEQN, KIQ022, KIQ025), by = "SEQN")
-
-
-h_sub <- demo_h %>% 
-  select(SEQN, RIDAGEYR, RIAGENDR, RIDRETH1, RIDEXPRG, WTMEC2YR, SDMVPSU, SDMVSTRA) %>%
-  left_join(bmx_h    %>% select(SEQN, BMXHT, BMXWT, BMXBMI, BMXWAIST), by = "SEQN") %>%
-  left_join(mgx_h    %>% select(SEQN, MGDCGSZ), by = "SEQN") %>%
-  left_join(dxx_h    %>% select(SEQN, DXDLALE, DXDRALE, DXDLLLE, DXDRLLE), by = "SEQN") %>%
-  left_join(biopro_h %>% select(SEQN, LBXSCR, LBXSGL), by = "SEQN") %>%
-  left_join(alb_h    %>% select(SEQN, URXUMA, URXUCR), by = "SEQN") %>%
-  left_join(bpx_h    %>% select(SEQN, BPXSY1, BPXDI1), by = "SEQN") %>%
-  left_join(kiq_h    %>% select(SEQN, KIQ022, KIQ025), by = "SEQN")
-
-
-
 
 # Cycle G
 g_sub <- demo_g %>% 
@@ -82,7 +59,7 @@ h_sub <- demo_h %>%
   left_join(bpx_h    %>% select(SEQN, BPXSY1, BPXDI1), by = "SEQN") %>%
   left_join(kiq_h    %>% select(SEQN, KIQ022, KIQ025), by = "SEQN")
 
-# MCreating a master data set and filtering out exclusions 
+# Creating a master data set and filtering out exclusions 
 nhanes_analytic <- bind_rows(g_sub, h_sub) %>%
   mutate(
     WTMEC4YR = WTMEC2YR / 2,    #Accounting for weightage !!
