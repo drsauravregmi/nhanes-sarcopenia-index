@@ -108,11 +108,3 @@ print(flowchart_tracker)
 
 cat("Analytic Sample N =", nrow(nhanes_analytic), "\n")
 
-# Specify Survey Design
-nhanes_design <- svydesign(
-  id      = ~SDMVPSU,
-  strata  = ~SDMVSTRA,
-  weights = ~WTMEC4YR,
-  nest    = TRUE,
-  data    = nhanes_analytic
-)
